@@ -1,0 +1,38 @@
+<div class="container">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Futam</th>
+        <th>Dátum</th>
+        <th>Győztes</th>
+        <th>Csapat</th>
+        <th>Körök száma</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (result of results; track result; let index = $index) {
+      <tr
+        (click)="setSelectRow(index, result)"
+        [ngClass]="{ active: selectedRow === index }"
+      >
+        <td>{{ result.grandPrix }}</td>
+        <td>{{ result.date | date : "shortDate" }}</td>
+        <td>{{ result.winner }}</td>
+        <td>{{ result.team }}</td>
+        <td>{{ result.laps }}</td>
+      </tr>
+      } @empty {
+      <tr>
+        <td colspan="5">Nincs adat</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  @if(selectedRankPlatform && !isHide){
+  <app-podium [podium]="selectedRankPlatform!" />
+  <div class="button-container">
+    <button (click)="hideDrivers()">Elrejt</button>
+  </div>
+  }
+</div>

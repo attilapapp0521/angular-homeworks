@@ -1,0 +1,52 @@
+.styled-table {
+  width: 100%; /* A táblázat teljes szélességű */
+  border-collapse: collapse; /* A cellák közötti rés eltüntetése */
+  margin: 20px 0; /* Távolság a többi elemtől */
+  font-size: 16px; /* Szövegméret */
+  font-family: Arial, sans-serif;
+  text-align: left; /* Szöveg balra igazítása */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Árnyék a táblázat körül */
+
+  thead tr {
+    background-color: #333333; /* Fejléc háttérszíne */
+    color: #ffffff; /* Fejléc szöveg színe */
+    text-transform: uppercase; /* Nagybetűs szöveg */
+    font-weight: bold;
+  }
+
+  th,
+  td {
+    padding: 12px 15px; /* Cellák belső margója */
+    border: 1px solid #dddddd; /* Cellák közötti vékony vonal */
+    width: auto; /* Automatikus szélesség */
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f3f3f3; /* Páros sorok világosabb szürke */
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #eaeaea; /* Páratlan sorok sötétebb szürke */
+  }
+
+  tbody tr:hover {
+    background-color: #d1d1d1; /* Sor kiemelése egérrel való rámutatáskor */
+    cursor: pointer; /* Mutató kurzor a sor fölött */
+  }
+}
+
+.styled-table tbody tr.active {
+  background-color: #347eba; /* Kiemelt sor háttérszíne */
+  color: white; /* Szöveg színe */
+}
+
+.button-container {
+  text-align: center; /* Vízszintes középre igazítás */
+  margin-top: 20px; /* Távolság a táblázattól */
+}
+
+button {
+  background-color: blue;
+  color: whitesmoke;
+  padding: 5px 10px;
+}

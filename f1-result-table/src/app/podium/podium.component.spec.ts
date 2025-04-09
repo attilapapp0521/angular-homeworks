@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RankPlatformComponent } from './rank-platform.component';
+import { PodiumComponent } from './podium.component';
 
 describe('RankPlatformComponent', () => {
-  let component: RankPlatformComponent;
-  let fixture: ComponentFixture<RankPlatformComponent>;
+  let component: PodiumComponent;
+  let fixture: ComponentFixture<PodiumComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RankPlatformComponent]
-    })
-    .compileComponents();
+      imports: [PodiumComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(RankPlatformComponent);
+    fixture = TestBed.createComponent(PodiumComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

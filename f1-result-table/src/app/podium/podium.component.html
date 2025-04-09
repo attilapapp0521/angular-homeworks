@@ -1,0 +1,5 @@
+<div class="container">
+  @for (driver of podium; track driver; let index = $index) {
+  <div class="podium-item">{{`${index+1}. ${driver}`}}</div>
+  }
+</div>

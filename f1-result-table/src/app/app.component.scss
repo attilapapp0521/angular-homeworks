@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.f1-logo {
+  width: 200px;
+  height: 150px;
+  background-image: url("https://images.seeklogo.com/logo-png/33/1/formula-1-logo-png_seeklogo-330361.png");
+  background-size: contain; /* A kép méretét az elemhez igazítja */
+  background-repeat: no-repeat; /* Nem ismétli meg a képet */
+  background-position: center; /* Középre igazítja a képet */
+}
+h1 {
+  margin-left: auto;
+  margin-right: auto;
+  text-transform: uppercase;
+  font-weight: bold;
+}
