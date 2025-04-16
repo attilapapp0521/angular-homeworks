@@ -1,0 +1,5 @@
+@for (infectionDay of infectionData; track infectionDay.date) {
+<p [appInfectionHighlight]="infectionDay" [iWantTheTruth]="iWantTheTruth">
+  {{ infectionDay | infectionSummary }}
+</p>
+}
