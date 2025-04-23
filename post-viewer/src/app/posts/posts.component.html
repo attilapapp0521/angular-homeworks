@@ -1,0 +1,12 @@
+<table>
+  @for (post of posts(); track post.id) {
+
+  <tr>
+    <td>
+      <a routerLink="details" [state]="{post}">{{ post.title }} </a>
+    </td>
+    <td><button (click)="deletePost(post.id)">Törlés</button></td>
+  </tr>
+
+  }
+</table>
