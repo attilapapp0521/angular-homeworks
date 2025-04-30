@@ -1,0 +1,19 @@
+<div class="task-card" [class.task-card--done]="task().isCompleted">
+  <div class="task-card__main">
+    <div>
+      <div class="task-card__title">{{ task().name }}</div>
+      <div class="task-card__desc">{{ task().description }}</div>
+    </div>
+    @if (!task().isCompleted) {
+    <button
+      class="button button--success"
+      (click)="markAsDone(task().id, task().username)"
+    >
+      Kész
+    </button>
+    } @else {
+    <span class="task-card__checkmark">✔</span>
+    }
+  </div>
+  <div class="task-card__user">{{ task().username }}</div>
+</div>

@@ -1,0 +1,20 @@
+<button class="button" routerLink="new">Új feladat</button>
+<button class="button" (click)="logout()">Kijelentkezés</button>
+
+<h2>Feladatok</h2>
+<div class="task-list">
+  @for (task of pendingTasks; track task.id) {
+  <app-task [task]="task" />
+  }@empty {
+  <p class="empty-list">Üres lista</p>
+  }
+</div>
+
+<h2>Kész Feladatok</h2>
+<div class="task-list done">
+  @for (completedTask of completedTasks; track completedTask.id) {
+  <app-task [task]="completedTask" />
+  }@empty {
+  <p class="empty-list">Üres lista</p>
+  }
+</div>

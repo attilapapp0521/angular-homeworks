@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h2>Bejelentkezés</h2>
+  <input
+    type="text"
+    [(ngModel)]="username"
+    name="username"
+    required
+    placeholder="Felhasználónév"
+  />
+  <button
+    class="button button--success"
+    (click)="onLogin()"
+    [disabled]="!username"
+  >
+    Belépés
+  </button>
+</div>

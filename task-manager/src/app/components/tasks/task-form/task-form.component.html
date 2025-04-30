@@ -1,0 +1,18 @@
+<form class="task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <input formControlName="name" placeholder="Név" />
+  <textarea
+    formControlName="description"
+    placeholder="Leírás"
+    rows="5"
+  ></textarea>
+  <div class="button-row">
+    <button class="button button--secondary" routerLink="/">Vissza</button>
+    <button
+      class="button button--success"
+      type="submit"
+      [disabled]="taskForm.invalid"
+    >
+      Létrehozás
+    </button>
+  </div>
+</form>

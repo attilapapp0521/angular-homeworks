@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+// _buttons.scss
+.button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: #28a745;
+  color: #fff;
+  &:hover:enabled {
+    background: #1e7e34;
+  }
+  &:disabled,
+  &[disabled] {
+    background: #cccccc;
+    color: #888888;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+  }
+}
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border 0.2s;
+  background: #fff;
+  color: #222;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+}
