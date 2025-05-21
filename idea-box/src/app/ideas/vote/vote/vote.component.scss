@@ -1,0 +1,14 @@
+button[mat-icon-button] {
+  background-color: white !important;
+  border: none !important;
+  box-shadow: none !important; // ha árnyék is lenne
+  outline: none !important; // ha fókusz outline is zavaró
+}
+
+button[mat-icon-button][disabled] {
+  background-color: white !important;
+  color: #bdbdbd;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

@@ -1,16 +1,33 @@
 @for (idea of ideas; track idea.id) {
-    <mat-card class="idea" [matBadge]="idea.votes">
-        <mat-card-header>
-            <mat-card-title>{{idea.name}}</mat-card-title>
-            <mat-card-subtitle>{{idea.description}}</mat-card-subtitle>
-        </mat-card-header>
-    
-        <mat-card-actions>
-            <button mat-icon-button (click)="upvoteIdea(idea)"><mat-icon>thumb_up</mat-icon></button>
-            <button mat-icon-button (click)="downvoteIdea(idea)"><mat-icon>thumb_down</mat-icon></button>
-            <button mat-icon-button (click)="deleteIdea(idea)"><mat-icon>delete</mat-icon></button>
-        </mat-card-actions>
-    </mat-card>
+<mat-card class="idea" [matBadge]="idea.votes">
+  <mat-card-header>
+    <mat-card-title>{{ idea.name }}</mat-card-title>
+    <mat-card-subtitle>{{ idea.description }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-actions>
+    <button
+      mat-icon-button
+      [routerLink]="['/ideas/new']"
+      [queryParams]="{ id: idea.id }"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <app-vote [idea]="idea" (apiResult)="handleApiResult($event)" />
+    <button mat-icon-button (click)="deleteIdea(idea)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['{{idea.id}}']"
+      [queryParams]="{ id: idea.id }"
+    >
+      Részletek
+    </button>
+  </mat-card-actions>
+</mat-card>
 } @empty {
-    <p>Nincs egyetlen ötlet sem</p>
+<p>Nincs egyetlen ötlet sem</p>
 }
+<button></button>

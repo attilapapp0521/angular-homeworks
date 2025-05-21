@@ -1,1 +1,10 @@
-<p>idea works!</p>
+<div class="idea-card">
+  <div class="card-header">
+    <div class="idea-title">{{ idea.name }}</div>
+    <app-vote [idea]="idea" (apiResult)="handleApiResult($event)" />
+  </div>
+  <div class="idea-description">
+    {{ idea.description }}
+  </div>
+  <button mat-raised-button color="primary" [routerLink]="''">Vissza</button>
+</div>
