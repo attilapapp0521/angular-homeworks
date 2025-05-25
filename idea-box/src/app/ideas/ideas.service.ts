@@ -20,9 +20,9 @@ export class IdeasService {
     return this.http.get<Idea[]>(`${this.BASE_URL}`);
   }
 
-  upvoteIdea(idea: Idea, username: string | undefined) {
+  voteIdea(idea: Idea, username: string | undefined, vote: string) {
     if (environment.mockAuthEnabled && username) {
-      this.storeIdea({ ...idea, votes: ++idea.votes }, username);
+      this.storeIdea({ ...idea, votes: vote === 'upVote' ? ++idea.votes : --idea.votes }, username);
       return of({ id: idea.id });
     }
     return this.http.patch<{ id: string }>(
@@ -31,20 +31,10 @@ export class IdeasService {
     );
   }
 
-  downvoteIdea(idea: Idea, username: string | undefined) {
-    if (environment.mockAuthEnabled && username) {
-      this.storeIdea({ ...idea, votes: --idea.votes }, username);
-      return of({ id: idea.id });
-    }
-    return this.http.patch<{ id: string }>(
-      `${this.BASE_URL}/${idea.id}/downvote`,
-      null
-    );
-  }
 
   deleteIdea(idea: Idea, username: string | undefined) {
     if (environment.mockAuthEnabled && username) {
-      let ideas: Idea[] = this.getAllIdeas(username).filter(
+      const ideas: Idea[] = this.getAllIdeas(username).filter(
         (i) => i.id !== idea.id
       );
 
@@ -66,7 +56,7 @@ export class IdeasService {
 
   editIdea(id: string, idea: NewIdea, username: string | undefined) {
     if (environment.mockAuthEnabled && username) {
-      let oldIdea = this.getIdeaById(username, id);
+      const oldIdea = this.getIdeaById(username, id);
 
       return oldIdea.pipe(
         map((i) => i?.votes ?? 0),
@@ -82,13 +72,19 @@ export class IdeasService {
 
   storeIdea(idea: Idea, username: string): void {
     if (!username) return;
-    console.log(idea);
 
     const ideas = this.getAllIdeas(username);
+    const index = ideas.findIndex((i) => i.id === idea.id);
+    let updateIdeas: Idea[];
 
-    ideas.push(idea);
-    console.log(ideas);
-    this.saveIdeas(username, ideas);
+    if(index === -1){
+      updateIdeas = [...ideas, idea];
+    }else {
+      updateIdeas = ideas.map(item =>
+      item.id === idea.id ? idea : item);
+    }
+
+    this.saveIdeas(username, updateIdeas);
   }
 
   saveIdeas(username: string, ideas: Idea[]): void {

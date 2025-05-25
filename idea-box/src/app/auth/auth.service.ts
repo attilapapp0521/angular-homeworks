@@ -50,9 +50,9 @@ export class AuthService {
 
   login(email: string, password: string) {
     if (environment.mockAuthEnabled) {
-      const users = this.getMockUsers();
+      const user = this.getMockUser();
 
-      if (!users[email] || users[email] !== password) {
+      if (!user?.email || user.password !== password) {
         this.showToast('Hibás e-mail vagy jelszó.');
         return throwError(() => new Error('Hibás belépési adatok'));
       }
@@ -102,18 +102,18 @@ export class AuthService {
 
   registration(email: string, password: string) {
     if (environment.mockAuthEnabled) {
-      const users = this.getMockUsers();
-      if (users[email]) {
+      const user = this.getMockUser();
+      if (user) {
         this.showToast('Ez az e-mail már regisztrálva van.');
         return throwError(() => new Error('Felhasználó már létezik'));
       }
 
-      this.storeMockUser(email, password);
+      this.storeMockUser(email, password );
 
       const mockUser: User = {
         email,
         id: 'mock_' + crypto.randomUUID(),
-        username: 'Mock_User',
+        username: `mockUser_${email}`,
       };
       this._currentUser.set(mockUser);
       this.storeUser(mockUser);
@@ -144,14 +144,17 @@ export class AuthService {
   }
 
   private storeMockUser(email: string, password: string) {
-    const users = this.getMockUsers();
-    users[email] = password;
-    localStorage.setItem('mockUsers', JSON.stringify(users));
+      localStorage.setItem(`mockUser_${email}`, JSON.stringify({ email, password }));
   }
 
-  private getMockUsers(): Record<string, string> {
-    const stored = localStorage.getItem('mockUsers');
-    return stored ? JSON.parse(stored) : {};
+  private getMockUser(): {email: string, password: string } | null   {
+    const email = this.currentUser()?.email;
+    if(email) {
+      const stored = localStorage.getItem(`mockUser_${email}`);
+      return stored ? JSON.parse(stored) as {email: string, password: string} : null;
+    }
+
+    return null;
   }
 
   //Igen, ez valójában ez UI feladat és nem itt lenne a helye, csak szemléltetés.

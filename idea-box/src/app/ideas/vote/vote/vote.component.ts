@@ -12,11 +12,12 @@ import { AuthService } from '../../../auth/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, finalize, map, of } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
+import {MatIconButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-vote',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, MatIconButton],
   templateUrl: './vote.component.html',
   styleUrl: './vote.component.scss',
 })
@@ -34,10 +35,10 @@ export class VoteComponent {
     private readonly destroyRef: DestroyRef
   ) {}
 
-  upvote() {
+  vote(voteType: string) {
     this.isLoading.set(true);
     this.ideasService
-      .upvoteIdea(this.idea, this.authService.currentUser()?.username)
+      .voteIdea(this.idea, this.authService.currentUser()?.username, voteType)
       .pipe(
         map(() => {
           this.apiResult.emit({ success: true });
@@ -45,24 +46,6 @@ export class VoteComponent {
         catchError((err) => {
           this.apiResult.emit({ success: false, error: err.message });
           return of(null);
-        }),
-        finalize(() => this.isLoading.set(false)),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe();
-  }
-
-  downvote() {
-    this.isLoading.set(true);
-    this.ideasService
-      .downvoteIdea(this.idea, this.authService.currentUser()?.username)
-      .pipe(
-        map(() => {
-          this.apiResult.emit({ success: true });
-        }),
-        catchError((err) => {
-          this.apiResult.emit({ success: false, error: err.message });
-          return err;
         }),
         finalize(() => this.isLoading.set(false)),
         takeUntilDestroyed(this.destroyRef)

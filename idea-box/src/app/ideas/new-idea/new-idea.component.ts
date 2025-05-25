@@ -52,8 +52,6 @@ export class NewIdeaComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.idea);
-
     if (this.idea) {
       this.newIdea.setValue({
         name: this.idea.name,
